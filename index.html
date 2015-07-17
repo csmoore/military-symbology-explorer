@@ -9,6 +9,7 @@
     <!-- build:css assets/css/external.css -->
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
     <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="./bower_components/mdi/css/materialdesignicons.min.css">
 
     <!-- endbuild -->
 
@@ -44,32 +45,72 @@
 
 </head>
 
-<body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-init="navCollapsed = true"
-                    ng-click="navCollapsed = !navCollapsed">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" ui-sref="home">Symbology explorer</a>
+<body layout="row" class="ng-cloak">
+
+<md-sidenav
+        layout="column"
+        class="md-sidenav-left md-whiteframe-z2"
+        md-component-id="left"
+        md-is-locked-open="$mdMedia('gt-lg')">
+    <md-toolbar class="md-primary md-whiteframe-z1" layout="row">
+        <div>
+            <md-button ng-click="" class="md-toolbar-tools" hide-gt-lg aria-label="Toggle Menu">
+                <i class="mdi mdi-menu">fff</i></md-button>
         </div>
-        <div id="navbar" class="navbar-collapse collapse" ng-class="!navCollapsed && 'in'" ng-click="navCollapsed=true">
-            <ul class="nav navbar-nav navbar-left">
-                <li><a ui-sref="explore">Explore</a></li>
-                <li><a ui-sref="symbolSet">Symbol set browser</a></li>
-                <li><a ui-sref="frames">Frames</a></li>
-                <li><a ui-sref="search">Search</a></li>
-                <li><a ui-sref="about">About</a></li>
-                <li><a href="https://github.com/kjellmf/military-symbology-explorer">Github project</a></li>
-            </ul>
+        <div>
+            <h1 class="md-toolbar-tools app-nowrap"><a href="./#home">Symbology explorer</a></h1>
         </div>
-    </div>
-</nav>
-<div ui-view></div>
+    </md-toolbar>
+    <md-content md-scroll-y ui-view="side" flex id="left-content"></md-content>
+</md-sidenav>
+
+<!--<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"-->
+<!--md-is-locked-open="$mdMedia('gt-sm')" layout-fill>-->
+<!--<md-toolbar class="md-whiteframe-z1">-->
+<!--<h1>Symbology explorer</h1>-->
+<!--</md-toolbar>-->
+<!--<md-content flex role="navigation">-->
+<!--<ul class="docs-menu app-button-list" flex>-->
+<!--<li>-->
+<!--<md-button ui-sref="explore">Explore</md-button>-->
+<!--</li>-->
+<!--<li>-->
+<!--<md-button ui-sref="symbolSet">Symbol set browser</md-button>-->
+<!--</li>-->
+<!--<li>-->
+<!--<md-button ui-sref="frames">Frames</md-button>-->
+<!--</li>-->
+<!--<li>-->
+<!--<md-button ui-sref="search">Search</md-button>-->
+<!--</li>-->
+<!--<li>-->
+<!--<md-button ui-sref="about">About</md-button>-->
+<!--</li>-->
+<!--<li>-->
+<!--<md-button href="https://github.com/kjellmf/military-symbology-explorer">Github project</md-button>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</md-content>-->
+<!--</md-sidenav>-->
+
+<div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2" layout-fill>
+    <md-toolbar layout="row" layout-align="end center" class="md-primary md-whiteframe-z1"
+                ng-include="'app/components/toolbar.html'"></md-toolbar>
+    <md-content md-scroll-y
+                tabindex="1"
+
+                ui-view
+                flex id="page-content" layout-padding>
+
+    </md-content>
+</div>
+<md-sidenav layout="column"
+            style="z-index: 100"
+            class="md-sidenav-right md-whiteframe-z2"
+            md-component-id="right-settings"
+            ng-include="'app/panels/settings/right-settings.html'">
+</md-sidenav>
+
 </body>
 
 </html>
