@@ -1,185 +1,94 @@
-<div class="container-fluid">
-    <div class="col-sm-2 col-md-2 sidebar">
-        <p></p>
-        <div class="panel panel-default">
-            <div class="panel-heading">Settings</div>
-            <div class="panel-body">
-                <div class="checkbox" title="Use colored bars for visualizing status">
-                    <label><input type="checkbox" ng-model="alternateAmplifiers"
-                                  ng-change="changeAlternateAmplifiers(alternateAmplifiers)">Use alternate status
-                        amplifiers</label>
-                </div>
-                <div class="checkbox" title="Use civilian frames if available">
-                    <label><input type="checkbox" ng-model="symbId.useCivilianFrame">Use civilian frames</label>
-                </div>
-                <div class="checkbox" title="Limit some modifiers to specific symbols">
-                    <label><input type="checkbox" ng-model="limitUseTo">Limit modifiers</label>
-                </div>
-                <div class="checkbox" title="Show internal meta data">
-                    <label><input type="checkbox" ng-model="showDebugInfo">Show debug info</label>
-                </div>
+<div>
+    <h2>Symbol identification code explorer</h2>
+
+    <div layout="row">
+        <div flex="60" flex-gt-md="50" layout="column">
+            <div layout="column" layout-gt-md="row">
+                <md-input-container flex>
+                    <label>Context</label>
+                    <md-select ng-model="context">
+                        <md-option ng-value="d" ng-repeat="d in symbolData.contexts">{{getLabel(d)}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Standard identity</label>
+                    <md-select ng-model="standardIdentity">
+                        <md-option ng-value="d" ng-repeat="d in symbolData.standardIdentities">{{getLabel(d)}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
             </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-sm-10 col-sm-offset-2">
-            <h2>Symbol identification code explorer</h2>
-            <hr>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-5 col-sm-offset-2">
-            <div class="row">
-                <form class="form-horizontal" role="form">
-                    <div>
-                        <div class="form-group">
-
-                            <label class="col-sm-4 control-label">Context</label>
-
-                            <div class="col-sm-8">
-                                <select class="form-control" ng-model="context"
-                                        ng-options="d as getLabel(d) for d in symbolData.contexts"
-                                        ng-change="changeContext(context)">
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Standard identity</label>
-
-                            <div class="col-sm-8">
-                                <select class="form-control" ng-model="standardIdentity"
-                                        ng-options="d as getLabel(d) for d in symbolData.standardIdentities"
-                                        ng-change="changeStandardIdentity(standardIdentity)"
-                                        >
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Symbol set</label>
-
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                <select class="form-control" ng-model="currentSymbolSet"
-                                        ng-options="d as getLabel(d) for d in symbolData.symbolSets"
-                                        ng-change="changeSymbolSet(currentSymbolSet)">
-                                    <option value="">-- choose symbol set --</option>
-                                </select>
-                                    <span class="input-group-btn"><a class="btn btn-info" ui-sref="symbolSet({symbolSetId: currentSymbolSet.id})">Browse</a></span>
-                                    </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Status</label>
-
-                            <div class="col-sm-8">
-                                <select class="form-control" ng-model="status"
-                                        ng-options="d as getLabel(d) for d in symbolData.statuses"
-                                        ng-change="changeStatus(status)">
-                                    <option value="">-- choose status --</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">HQTFDummy</label>
-
-                            <div class="col-sm-8">
-                                <select class="form-control" ng-model="hqtfDummy"
-                                        ng-options="d as getLabel(d) for d in symbolData.hqtfDummies"
-                                        ng-change="changeHQTFDummy(hqtfDummy)">
-                                    <option value="">-- choose status --</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Amplifier</label>
-
-                            <div class="col-sm-8">
-                                <select class="form-control" ng-model="amplifier"
-                                        ng-options="d as getLabel(d) for d in symbolData.amplifier"
-                                        ng-change="changeAmplifier(amplifier)">
-                                    <option value="">-- choose amplifer --</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label"></label>
-
-                            <div class="col-sm-8">
-                                <select class="form-control" ng-model="amplifierDescriptor"
-                                        ng-options="d as getLabel(d) for d in amplifier.descriptors"
-                                        ng-change="changeAmplifierDescriptor(amplifierDescriptor)">
-                                    <option value="">-- choose amplifer --</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Entity</label>
-
-                            <div class="col-sm-8">
-                                <select class="form-control" ng-model="entity"
-                                        ng-options="d as getLabel(d) for d in currentSymbolSet.entities"
-                                        ng-change="changeEntity(entity)">
-                                    <option value="">-- choose entity --</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Entity type</label>
-
-                            <div class="col-sm-8">
-                                <select class="form-control" ng-model="entityType"
-                                        ng-options="d as getLabel(d) for d in entity.entityTypes"
-                                        ng-change="changeEntityType(entityType)">
-                                    <option value="">00</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Entity subtype</label>
-
-                            <div class="col-sm-8">
-                                <select class="form-control" ng-model="entitySubType"
-                                        ng-options="d as getLabel(d) for d in getEntitySubTypes()"
-                                        ng-change="changeEntitySubType(entitySubType)">
-                                    <option value="">00</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Sector one modifier</label>
-
-                            <div class="col-sm-8">
-                                <select class="form-control" ng-model="sectorOneModifier"
-                                        ng-options="getLabel(d) group by d.category for d in currentSymbolSet.sectorOneModifiers | limitUseToModFilter:this:limitUseTo"
-                                        ng-change="ss.setSectorOneModifier(sectorOneModifier)"
-                                        ng-disabled="currentEntity | disableModOne">
-                                    <option value="">00</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Sector two modifier</label>
-
-                            <div class="col-sm-8">
-                                <select class="form-control" ng-model="sectorTwoModifier"
-                                        ng-options="getLabel(d) group by d.category for d in currentSymbolSet.sectorTwoModifiers | limitUseToModFilter:this:limitUseTo"
-                                        ng-change="ss.setSectorTwoModifier(sectorTwoModifier)"
-                                        ng-disabled="currentEntity | disableModTwo">
-                                    <option value="">00</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+            <md-input-container>
+                <label>Symbol set</label>
+                <md-select ng-model="currentSymbolSet">
+                    <md-option ng-value="d" ng-repeat="d in symbolData.symbolSets">{{getLabel(d)}}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Status</label>
+                <md-select ng-model="status">
+                    <md-option ng-value="d" ng-repeat="d in symbolData.statuses">{{getLabel(d)}}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>HQ/TF/Dummy</label>
+                <md-select ng-model="hqtfDummy">
+                    <md-option ng-value="d" ng-repeat="d in symbolData.hqtfDummies">{{getLabel(d)}}</md-option>
+                </md-select>
+            </md-input-container>
+            <div layout="column" layout-gt-md="row">
+                <md-input-container flex>
+                    <label>Amplifier</label>
+                    <md-select ng-model="amplifier">
+                        <md-option ng-value="d" ng-repeat="d in symbolData.amplifier">{{getLabel(d)}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Amplifier descriptor</label>
+                    <md-select ng-model="amplifierDescriptor">
+                        <md-option ng-value="d" ng-repeat="d in amplifier.descriptors">{{getLabel(d)}}</md-option>
+                    </md-select>
+                </md-input-container>
             </div>
+            <md-input-container>
+                <label>Entity</label>
+                <md-select ng-model="entity">
+                    <md-option ng-value="d" ng-repeat="d in currentSymbolSet.entities">{{getLabel(d)}}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Entity type</label>
+                <md-select ng-model="entityType">
+                    <md-option ng-value="d" ng-repeat="d in entity.entityTypes">{{getLabel(d)}}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Entity subtype</label>
+                <md-select ng-model="entitySubtype">
+                    <md-option ng-value="d" ng-repeat="d in getEntitySubTypes()">{{getLabel(d)}}</md-option>
+                </md-select>
+            </md-input-container>
+            <!--ng-options="getLabel(d) group by d.category for d in currentSymbolSet.sectorOneModifiers | limitUseToModFilter:this:limitUseTo"-->
+            <md-input-container>
+                <label>Sector one modifier</label>
+                <md-select ng-model="sectorOneModifier" ng-disabled="currentEntity | disableModOne">
+                    <md-optgroup label="{{key}}"
+                                 ng-repeat="(key, value) in currentSymbolSet.sectorOneModifiers | limitUseToModFilter:this:settings.limitUseTo | groupBy: 'category'">
+                        <md-option ng-value="d" ng-repeat="d in value">{{getLabel(d)}}</md-option>
+                    </md-optgroup>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Sector two modifier</label>
+                <md-select ng-model="sectorTwoModifier" ng-disabled="currentEntity | disableModTwo">
+                    <md-optgroup label="{{key}}"
+                                 ng-repeat="(key, value) in currentSymbolSet.sectorTwoModifiers | limitUseToModFilter:this:settings.limitUseTo | groupBy: 'category'">
+                        <md-option ng-value="d" ng-repeat="d in value">{{getLabel(d)}}</md-option>
+                    </md-optgroup>
+                </md-select>
+            </md-input-container>
         </div>
-        <div class="col-sm-5">
+        <div flex="50" layout="column">
             <table class="table table-bordered table-condensed">
                 <tr>
                     <td class="symbol">
@@ -195,17 +104,23 @@
                         </div>
                     </td>
                     <td>{{currentEntity.remarks}}
-                        <div ng-show="showDebugInfo"><small><strong>ID</strong> <code>{{currentEntity.id}}</code><br>
-                        <strong>Icon</strong> <code>{{currentEntity.icon}}</code></small></div>
+                        <div ng-show="settings.showDebugInfo">
+                            <small><strong>ID</strong> <code>{{currentEntity.id}}</code><br>
+                                <strong>Icon</strong> <code>{{currentEntity.icon}}</code></small>
+                        </div>
                         <br>
 
                     </td>
                 </tr>
-                <tr><td colspan="2">
-                    <a class="btn btn-default btn-xs" ng-click="saveAsPng()" title="Does not work in Internet Explorer">Save as PNG</a>
-                    <a class="btn btn-default btn-xs" clip-copy="copySic()" title="Copy symbol identification code to clipboard">Copy SIC</a>
-                    <a class="btn btn-default btn-xs" ui-sref="explore({sic: copySic()})">Link</a>
-                </td></tr>
+                <tr>
+                    <td colspan="2">
+                        <a class="btn btn-default btn-xs" ng-click="saveAsPng()"
+                           title="Does not work in Internet Explorer">Save as PNG</a>
+                        <a class="btn btn-default btn-xs" clip-copy="copySic()"
+                           title="Copy symbol identification code to clipboard">Copy SIC</a>
+                        <a class="btn btn-default btn-xs" ui-sref="explore({sic: copySic()})">Link</a>
+                    </td>
+                </tr>
             </table>
             <div ng-controller="SymbolIdCodeCtrl">
                 <table class="table table-bordered symbolid-table">
@@ -318,11 +233,114 @@
                 </table>
 
             </div>
+
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <!--<a class="btn btn-primary">Explore current symbol set</a>-->
-        </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-5 col-sm-offset-2">
+        <!-- <div class="row">
+             <form class="form-horizontal" role="form">
+                 <div>
+
+                     &lt;!&ndash;<div class="form-group">&ndash;&gt;
+                     &lt;!&ndash;<label class="col-sm-4 control-label">Symbol set</label>&ndash;&gt;
+
+                     &lt;!&ndash;<div class="col-sm-8">&ndash;&gt;
+                     &lt;!&ndash;<div class="input-group">&ndash;&gt;
+                     &lt;!&ndash;<select class="form-control" ng-model="currentSymbolSet"&ndash;&gt;
+                     &lt;!&ndash;ng-options="d as getLabel(d) for d in symbolData.symbolSets"&ndash;&gt;
+                     &lt;!&ndash;ng-change="changeSymbolSet(currentSymbolSet)">&ndash;&gt;
+                     &lt;!&ndash;<option value="">&#45;&#45; choose symbol set &#45;&#45;</option>&ndash;&gt;
+                     &lt;!&ndash;</select>&ndash;&gt;
+                     &lt;!&ndash;<span class="input-group-btn"><a class="btn btn-info"&ndash;&gt;
+                     &lt;!&ndash;ui-sref="symbolSet({symbolSetId: currentSymbolSet.id})">Browse</a></span>&ndash;&gt;
+                     &lt;!&ndash;</div>&ndash;&gt;
+                     &lt;!&ndash;</div>&ndash;&gt;
+                     &lt;!&ndash;</div>&ndash;&gt;
+
+                     <div class="form-group">
+                         <label class="col-sm-4 control-label">Amplifier</label>
+
+                         <div class="col-sm-8">
+                             <select class="form-control" ng-model="amplifier"
+                                     ng-options="d as getLabel(d) for d in symbolData.amplifier"
+                                     ng-change="changeAmplifier(amplifier)">
+                                 <option value="">&#45;&#45; choose amplifer &#45;&#45;</option>
+                             </select>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label class="col-sm-4 control-label"></label>
+
+                         <div class="col-sm-8">
+                             <select class="form-control" ng-model="amplifierDescriptor"
+                                     ng-options="d as getLabel(d) for d in amplifier.descriptors"
+                                     ng-change="changeAmplifierDescriptor(amplifierDescriptor)">
+                                 <option value="">&#45;&#45; choose amplifer &#45;&#45;</option>
+                             </select>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label class="col-sm-4 control-label">Entity</label>
+
+                         <div class="col-sm-8">
+                             <select class="form-control" ng-model="entity"
+                                     ng-options="d as getLabel(d) for d in currentSymbolSet.entities"
+                                     ng-change="changeEntity(entity)">
+                                 <option value="">&#45;&#45; choose entity &#45;&#45;</option>
+                             </select>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label class="col-sm-4 control-label">Entity type</label>
+
+                         <div class="col-sm-8">
+                             <select class="form-control" ng-model="entityType"
+                                     ng-options="d as getLabel(d) for d in entity.entityTypes"
+                                     ng-change="changeEntityType(entityType)">
+                                 <option value="">00</option>
+                             </select>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label class="col-sm-4 control-label">Entity subtype</label>
+
+                         <div class="col-sm-8">
+                             <select class="form-control" ng-model="entitySubType"
+                                     ng-options="d as getLabel(d) for d in getEntitySubTypes()"
+                                     ng-change="changeEntitySubType(entitySubType)">
+                                 <option value="">00</option>
+                             </select>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label class="col-sm-4 control-label">Sector one modifier</label>
+
+                         <div class="col-sm-8">
+                             <select class="form-control" ng-model="sectorOneModifier"
+                                     ng-options="getLabel(d) group by d.category for d in currentSymbolSet.sectorOneModifiers | limitUseToModFilter:this:limitUseTo"
+                                     ng-change="ss.setSectorOneModifier(sectorOneModifier)"
+                                     ng-disabled="currentEntity | disableModOne">
+                                 <option value="">00</option>
+                             </select>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label class="col-sm-4 control-label">Sector two modifier</label>
+
+                         <div class="col-sm-8">
+                             <select class="form-control" ng-model="sectorTwoModifier"
+                                     ng-options="getLabel(d) group by d.category for d in currentSymbolSet.sectorTwoModifiers | limitUseToModFilter:this:limitUseTo"
+                                     ng-change="ss.setSectorTwoModifier(sectorTwoModifier)"
+                                     ng-disabled="currentEntity | disableModTwo">
+                                 <option value="">00</option>
+                             </select>
+                         </div>
+                     </div>
+                 </div>
+             </form>
+         </div>-->
     </div>
 </div>

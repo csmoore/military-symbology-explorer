@@ -3,8 +3,18 @@ angular.module('symbolApp')
         $stateProvider
             .state('explore', {
                 url: '/explore/:sic',
-                templateUrl: 'app/components/symbol/symbol.html',
-                controller: "SymbolCtrl"
+                views: {
+                    side: {
+                        templateUrl: 'app/components/symbol/symbol.side.html',
+                        controller: "SidExplorerSettingsCtrl"
+                    },
+                    body: {
+                        templateUrl: 'app/components/symbol/symbol.html',
+                        controller: "SymbolCtrl"
+                    }
+                },
+
+
             })
     })
 
@@ -188,13 +198,30 @@ angular.module('symbolApp')
 
     }])
 
+    .factory('sidExplorerSettings', [function () {
+        settings = {
+            showDebugInfo: false,
+            useCivilianFrame: false,
+            limitUseTo: true,
+            alternateAmplifiers: false
+        };
+        return {
+            settings: settings
+        };
+    }])
+
+    .controller('SidExplorerSettingsCtrl', ["$scope", "sidExplorerSettings", function ($scope, sidExplorerSettings) {
+        $scope.settings = sidExplorerSettings.settings;
+    }])
+
     .controller('SymbolCtrl', ['$scope', '$log', '$stateParams', 'symbolIdCodeService', 'disableModOneFilter',
-        'disableModTwoFilter', 'limitUseToModFilterFilter',
-        function ($scope, $log, $stateParams, symbolIdCodeService, disableModOneFilter, disableModTwoFilter, limitUseToModFilterFilter) {
+        'disableModTwoFilter', 'limitUseToModFilterFilter', 'sidExplorerSettings',
+        function ($scope, $log, $stateParams, symbolIdCodeService, disableModOneFilter, disableModTwoFilter, limitUseToModFilterFilter, sidExplorerSettings) {
             if ($stateParams.sic) {
                 symbolIdCodeService.initializeFromSymbolIdentificationCode($stateParams.sic);
 
             }
+            $scope.settings = sidExplorerSettings.settings;
             $scope.frame = symbolIdCodeService.getFrameFn;
             $scope.main = symbolIdCodeService.getEntityFn;
             $scope.special = symbolIdCodeService.getSpecialEntitySubTypeFn;
@@ -218,10 +245,11 @@ angular.module('symbolApp')
             $scope.entitySubType = symbolIdCodeService.symbId.entitySubType;
             $scope.sectorOneModifier = symbolIdCodeService.symbId.sectorOneModifier;
             $scope.sectorTwoModifier = symbolIdCodeService.symbId.sectorTwoModifier;
-            $scope.alternateAmplifiers = symbolIdCodeService.getAlternateAmplifiers();
-            $scope.limitUseTo = true;
             $scope.currentEntity = $scope.entitySubType || $scope.entityType || $scope.entity;
-            $scope.showDebugInfo = false;
+
+            $scope.$watch('settings.useCivilianFrame', function (value) {
+                symbolIdCodeService.symbId.useCivilianFrame = value;
+            });
 
             $scope.changeContext = function (context) {
                 symbolIdCodeService.setContext(context);
@@ -251,9 +279,9 @@ angular.module('symbolApp')
                 symbolIdCodeService.setStatus(status);
             };
 
-            $scope.changeAlternateAmplifiers = function (alternateAmplifiers) {
+            $scope.$watch("settings.alternateAmplifiers", function (alternateAmplifiers) {
                 symbolIdCodeService.setAlternateAmplifiers(alternateAmplifiers);
-            };
+            });
 
             $scope.changeHQTFDummy = function (hqTfDummy) {
                 symbolIdCodeService.setHQTFDummy(hqTfDummy);
@@ -282,7 +310,7 @@ angular.module('symbolApp')
             };
 
             function checkLimitUseTo(item) {
-                if ($scope.limitUseTo && item && item.limitUseTo) {
+                if (settings.limitUseTo && item && item.limitUseTo) {
                     if (($scope.entitySubType && item.limitUseTo.indexOf($scope.entitySubType.id) >= 0)
                         || ($scope.entityType && item.limitUseTo.indexOf($scope.entityType.id) >= 0)
                         || ($scope.entity && item.limitUseTo.indexOf($scope.entity.id) >= 0)) {
@@ -310,7 +338,7 @@ angular.module('symbolApp')
                 resetModifiers($scope.currentEntity);
             };
 
-            $scope.getEntitySubTypes = function() {
+            $scope.getEntitySubTypes = function () {
                 var subtypes = [];
                 if ($scope.entityType) {
                     if ($scope.currentSymbolSet.specialEntitySubTypes) {

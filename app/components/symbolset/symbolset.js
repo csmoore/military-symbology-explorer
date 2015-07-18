@@ -3,8 +3,13 @@ angular.module('symbolApp')
         $stateProvider
             .state('symbolSet', {
                 url: '/symbolset/:symbolSetId',
-                templateUrl: 'app/components/symbolset/symbolset.html',
-                controller: 'SymbolSetBrowserCtrl'
+                views: {
+                    body: {
+                        templateUrl: 'app/components/symbolset/symbolset.html',
+                        controller: 'SymbolSetBrowserCtrl'
+                    }
+                }
+
             })
             .state('symbolSet.specialsubtypes', {url: "#specialsubtypes"})
             .state('symbolSet.symboltable', {url: "#symboltable"})
