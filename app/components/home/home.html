@@ -10,7 +10,7 @@
 
     <md-grid-list md-cols="4" md-cols-gt-md="9" md-row-height="70px">
         <md-grid-tile
-                ng-repeat="sic in ['10131000001211050000',
+                ng-repeat="sidc in ['10131000001211050000',
                                    '10233000001201000000',
                                    '10051000001211040000',
                                    '10031030141211040000',
@@ -20,10 +20,10 @@
                                    '10031000001110980000',
                                    '10031002181211020000'
                                    ]">
-            <a ui-sref="explore({sic:{{sic}}})">
-                <milsymbol sic="{{sic}}"></milsymbol>
+            <a href="#/explore/{{sidc}}">
+                <milsymbol sic="{{sidc}}"></milsymbol>
             </a>
-            <md-tooltip>{{sic}}</md-tooltip>
+            <md-tooltip>{{sidc}}</md-tooltip>
         </md-grid-tile>
     </md-grid-list>
 

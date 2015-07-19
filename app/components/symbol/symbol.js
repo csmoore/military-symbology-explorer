@@ -137,7 +137,6 @@ angular.module('symbolApp')
         function getEntityFn() {
             var entity = symbolIdCode.entitySubType || symbolIdCode.entityType || symbolIdCode.entity;
             if (entity && entity.icon == 'SPECIAL') {
-                $log.debug('Special');
                 entity = symbolIdCode.entityType;
             }
             return pathService.getEntityFilePath(entity, symbolIdCode.symbolSet, symbolIdCode.standardIdentity.id);
@@ -251,31 +250,73 @@ angular.module('symbolApp')
                 symbolIdCodeService.symbId.useCivilianFrame = value;
             });
 
-            $scope.changeContext = function (context) {
+            $scope.$watch("context", function (newVal, oldVal) {
+                if (newVal !== oldVal) changeContext(newVal);
+            });
+            $scope.$watch("standardIdentity", function (newVal, oldVal) {
+                if (newVal !== oldVal) changeStandardIdentity(newVal);
+            });
+            $scope.$watch("currentSymbolSet", function (newVal, oldVal) {
+                if (newVal !== oldVal) changeSymbolSet(newVal);
+            });
+            $scope.$watch("status", function (newVal, oldVal) {
+                if (newVal !== oldVal) changeStatus(newVal);
+            });
+            $scope.$watch("hqtfDummy", function (newVal, oldVal) {
+                if (newVal !== oldVal) changeHQTFDummy(newVal);
+            });
+            $scope.$watch("amplifier", function (newVal, oldVal) {
+                if (newVal !== oldVal) changeAmplifier(newVal);
+            });
+            $scope.$watch("amplifierDescriptor", function (newVal, oldVal) {
+                if (newVal !== oldVal) changeAmplifierDescriptor(newVal);
+            });
+            $scope.$watch("entity", function (newVal, oldVal) {
+                if (newVal !== oldVal) changeEntity(newVal);
+            });
+            $scope.$watch("entityType", function (newVal, oldVal) {
+                if (newVal !== oldVal) changeEntityType(newVal);
+            });
+            $scope.$watch("entitySubType", function (newVal, oldVal) {
+                if (newVal !== oldVal) changeEntitySubType(newVal);
+            });
+            $scope.$watch("sectorOneModifier", function (newVal, oldVal) {
+                if (newVal !== oldVal) symbolIdCodeService.setSectorOneModifier(newVal);
+            });
+
+            $scope.$watch("sectorTwoModifier", function (newVal, oldVal) {
+                if (newVal !== oldVal) symbolIdCodeService.setSectorTwoModifier(newVal);
+            });
+
+
+            function changeContext(context) {
                 symbolIdCodeService.setContext(context);
             };
 
-            $scope.changeStandardIdentity = function (standardIdentity) {
+            function changeStandardIdentity(standardIdentity) {
                 symbolIdCodeService.setStandardIdentity(standardIdentity);
 
             };
 
-            $scope.changeSymbolSet = function (symbolSet) {
+            function changeSymbolSet(symbolSet) {
+                if (!symbolSet) {
+                    return;
+                }
                 symbolIdCodeService.setSymbolSet(symbolSet);
                 $scope.entity = null;
 
                 $scope.entity = symbolSet.entities[0];
-                $scope.changeEntity(symbolSet.entities[0]);
+                changeEntity(symbolSet.entities[0]);
                 $scope.sectorOneModifier = null;
                 $scope.sectorTwoModifier = null;
                 symbolIdCodeService.setSectorOneModifier(null);
                 symbolIdCodeService.setSectorTwoModifier(null);
                 $scope.amplifier = symbolData.amplifier[0];
-                $scope.changeAmplifier(symbolData.amplifier[0]);
+                changeAmplifier(symbolData.amplifier[0]);
 
             };
 
-            $scope.changeStatus = function (status) {
+            function changeStatus(status) {
                 symbolIdCodeService.setStatus(status);
             };
 
@@ -283,30 +324,30 @@ angular.module('symbolApp')
                 symbolIdCodeService.setAlternateAmplifiers(alternateAmplifiers);
             });
 
-            $scope.changeHQTFDummy = function (hqTfDummy) {
+            function changeHQTFDummy(hqTfDummy) {
                 symbolIdCodeService.setHQTFDummy(hqTfDummy);
             };
 
-            $scope.changeAmplifier = function (amplifier) {
+            function changeAmplifier(amplifier) {
                 symbolIdCodeService.setAmplifier(amplifier);
                 $scope.amplifierDescriptor = amplifier.descriptors[0];
-                $scope.changeAmplifierDescriptor(amplifier.descriptors[0]);
+                changeAmplifierDescriptor(amplifier.descriptors[0]);
             };
 
-            $scope.changeAmplifierDescriptor = function (amplifierDescriptor) {
+            function changeAmplifierDescriptor(amplifierDescriptor) {
                 symbolIdCodeService.setAmplifierDescriptor(amplifierDescriptor);
             };
 
-            $scope.changeEntity = function (entity) {
+            function changeEntity(entity) {
                 symbolIdCodeService.setEntity(entity);
                 $scope.entityType = null;
-                $scope.changeEntityType(null);
+                changeEntityType(null);
             };
 
-            $scope.changeEntityType = function (entityType) {
+            function changeEntityType(entityType) {
                 symbolIdCodeService.setEntityType(entityType);
                 $scope.entitySubType = null;
-                $scope.changeEntitySubType(null);
+                changeEntitySubType(null);
             };
 
             function checkLimitUseTo(item) {
@@ -332,7 +373,7 @@ angular.module('symbolApp')
 
             }
 
-            $scope.changeEntitySubType = function (entitySubType) {
+            function changeEntitySubType(entitySubType) {
                 symbolIdCodeService.setEntitySubType(entitySubType);
                 $scope.currentEntity = $scope.entitySubType || $scope.entityType || $scope.entity;
                 resetModifiers($scope.currentEntity);
