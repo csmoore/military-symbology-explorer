@@ -7,7 +7,12 @@ angular.module('symbolApp')
                     body: {
                         templateUrl: 'app/components/symbolset/symbolset.html',
                         controller: 'SymbolSetBrowserCtrl'
+                    },
+                    side: {
+                        templateUrl: 'app/components/symbolset/symbolset.side.html',
+                        controller: 'SymbolsetSideCtrl'
                     }
+
                 }
 
             })
@@ -34,33 +39,64 @@ angular.module('symbolApp')
         var settings = {
             useCivilianFrames: false,
             showDebugInfo: false,
-            showLimitUseToOnly: false
+            showLimitUseToOnly: false,
+            currentSymbolSet: null,
+
         };
         return {
             settings: settings
         };
     }])
 
+    .controller('SymbolsetSideCtrl', ["$scope", "$timeout", "symbolsetBrowserSettings", "currentSymbol", function ($scope, $timeout, symbolsetBrowserSettings, currentSymbol) {
+        $scope.symbolData = symbolData;
+        $scope.symb = currentSymbol.symb;
+        $scope.settings = symbolsetBrowserSettings.settings;
+        $scope.redrawSymbolSet = function () {
+            var tmp = $scope.settings.currentSymbolSet;
+            $timeout(function () {
+                $scope.settings.currentSymbolSet = null;
+            });
+            $timeout(function () {
+                $scope.settings.currentSymbolSet = tmp;
+            });
+        };
+
+    }])
+
     .controller('SymbolSetBrowserCtrl', ['$scope', '$stateParams', '$log', '$timeout',
         'symbolIdCodeService', 'config', 'symbolsetBrowserSettings',
         function ($scope, $stateParams, $log, $timeout, symbolIdCodeService, config, symbolsetBrowserSettings) {
+            $scope.settings = symbolsetBrowserSettings.settings;
             if ($stateParams.symbolSetId) {
                 var tmp = findWithAttr(symbolData.symbolSets, 'id', $stateParams.symbolSetId);
                 if (tmp) {
-                    $scope.currentSymbolSet = tmp;
+                    $scope.settings.currentSymbolSet = tmp;
                 } else {
-                    $scope.currentSymbolSet = symbolIdCodeService.symbId.symbolSet;
+                    $scope.settings.currentSymbolSet = symbolIdCodeService.symbId.symbolSet;
                 }
             } else {
-                $scope.currentSymbolSet = symbolIdCodeService.symbId.symbolSet;
+                if (!$scope.settings.currentSymbolSet) {
+                    $scope.settings.currentSymbolSet = symbolIdCodeService.symbId.symbolSet;
+                }
             }
             $scope.symbolData = symbolData;
-            $scope.settings = symbolsetBrowserSettings.settings;
+
 
             var SVG_PATH = config.SVG_PATH;
             $scope.SVG_PATH = SVG_PATH;
 
-            $scope.changeSymbolSet = function (symbolSet) {
+            $scope.$watch('settings.currentSymbolSet', function (newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    changeSymbolSet(newVal)
+                }
+            });
+
+            function changeSymbolSet(symbolSet) {
+                if (!symbolSet)  {
+                    $scope.currentSymbolSet = symbolSet;
+                    return;
+                };
                 $scope.ttest = symbolSet.id;
                 $scope.modonepath = SVG_PATH + symbolSet.graphicFolder["modifierOnes"] + "/";
                 $scope.modtwopath = SVG_PATH + symbolSet.graphicFolder["modifierTwos"] + "/";
@@ -69,22 +105,15 @@ angular.module('symbolApp')
                 } else {
                     $scope.currentBoundingOctagon = "assets/img/BoundingOctagonHorizontal.svg";
                 }
+                $scope.currentSymbolSet = symbolSet;
             };
 
-            $scope.changeSymbolSet($scope.currentSymbolSet);
+            changeSymbolSet($scope.settings.currentSymbolSet);
             $scope.getLabel = function (element) {
                 return element.digits + " " + element.label;
             };
 
-            $scope.redrawSymbolSet = function () {
-                var tmp = $scope.currentSymbolSet;
-                $timeout(function () {
-                    $scope.currentSymbolSet = null;
-                });
-                $timeout(function () {
-                    $scope.currentSymbolSet = tmp;
-                });
-            };
+
         }])
 
     .controller('SidebarCtrl', ['$scope', 'currentSymbol', 'symbolsetBrowserSettings', function ($scope, currentSymbol, symbolsetBrowserSettings) {
