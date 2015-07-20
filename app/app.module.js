@@ -1,9 +1,20 @@
-angular.module('symbolApp', ['ngMaterial', 'ui.router', 'ngClipboard', 'angular.filter'])
-    .constant("config", {
-        BLANK_PATH: "assets/img/blank.png",
-        SVG_PATH: "svg/MIL_STD_2525D_Symbols/"
-    })
+(function () {
+    angular.module('symbolApp', ['ngMaterial', 'ui.router', 'ngClipboard', 'angular.filter'])
+        .constant("config", {
+            BLANK_PATH: "assets/img/blank.png",
+            SVG_PATH: "svg/MIL_STD_2525D_Symbols/"
+        })
 
-    .config(['ngClipProvider', function (ngClipProvider) {
-        ngClipProvider.setPath("bower_components/zeroclipboard/dist/ZeroClipboard.swf");
-    }]);
+        .config(['ngClipProvider', function (ngClipProvider) {
+            ngClipProvider.setPath("bower_components/zeroclipboard/dist/ZeroClipboard.swf");
+        }])
+
+        .controller('MainController', ['$mdSidenav', MainController]);
+
+    function MainController($mdSidenav) {
+        var self = this;
+        self.toggleSideNav = function () {
+            $mdSidenav('left-nav').toggle();
+        }
+    }
+})();
