@@ -55,11 +55,11 @@
         md-component-id="left-nav"
         md-is-locked-open="$mdMedia('gt-lg')">
     <md-toolbar class="md-primary md-whiteframe-z1" layout="row">
-        <!--<div>-->
-            <!--<md-button ng-click="sideNav.toggleSideNav()" class="md-toolbar-tools" aria-label="Toggle Menu">-->
-                <!--<md-icon class="mdi mdi-menu"></md-icon>-->
-            <!--</md-button>-->
-        <!--</div>-->
+        <div hide-gt-lg>
+            <md-button ng-click="sideNav.toggleSideNav()" class="md-toolbar-tools" aria-label="Toggle Menu">
+                <md-icon class="mdi mdi-menu"></md-icon>
+            </md-button>
+        </div>
         <div>
             <h1 class="md-toolbar-tools app-nowrap"><a href="./#home">Symbology explorer</a></h1>
         </div>
@@ -78,12 +78,12 @@
 
     </md-content>
 </div>
-<md-sidenav layout="column"
-            style="z-index: 100"
-            class="md-sidenav-right md-whiteframe-z2"
-            md-component-id="right-settings"
-            ng-include="'app/panels/settings/right-settings.html'">
-</md-sidenav>
+<!--<md-sidenav layout="column"-->
+            <!--style="z-index: 100"-->
+            <!--class="md-sidenav-right md-whiteframe-z2"-->
+            <!--md-component-id="right-settings"-->
+            <!--ng-include="'app/panels/settings/right-settings.html'">-->
+<!--</md-sidenav>-->
 
 </body>
 
