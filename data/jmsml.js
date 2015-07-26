@@ -397,6 +397,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Not Applicable", 
+          "id": "NOT_APPLICABLE_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Attack/Strike", 
           "id": "ATTACK_STRIKE_MOD", 
@@ -680,6 +685,11 @@ var symbolData={
       ], 
       "sectorTwoModifiers": [
         {
+          "digits": "00", 
+          "label": "Not Applicable", 
+          "id": "NOT_APPLICABLE_2_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Heavy", 
           "id": "HVY_MOD", 
@@ -789,6 +799,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Air", 
           "id": "AIR_MOD", 
@@ -846,6 +861,11 @@ var symbolData={
         }
       ], 
       "sectorTwoModifiers": [
+        {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_2_MOD"
+        }, 
         {
           "digits": "01", 
           "label": "Air", 
@@ -1239,6 +1259,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Low Earth Orbit (LEO)", 
           "id": "LEO_MOD", 
@@ -1282,6 +1307,11 @@ var symbolData={
         }
       ], 
       "sectorTwoModifiers": [
+        {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_2_MOD"
+        }, 
         {
           "digits": "01", 
           "label": "Optical", 
@@ -1426,6 +1456,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Ballistic", 
           "id": "BALLISTIC_MOD", 
@@ -1448,6 +1483,11 @@ var symbolData={
         }
       ], 
       "sectorTwoModifiers": [
+        {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_2_MOD"
+        }, 
         {
           "digits": "01", 
           "label": "Short Range", 
@@ -3263,6 +3303,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Air Mobile/Air Assault (US Only)", 
           "id": "AIR_MOBILE_AIR_ASSAULT_MOD", 
@@ -3811,6 +3856,11 @@ var symbolData={
       ], 
       "sectorTwoModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_2_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Airborne", 
           "id": "AIRBORNE_MOD", 
@@ -4305,6 +4355,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Assassination", 
           "id": "ASSASSINATION_MOD", 
@@ -4474,6 +4529,11 @@ var symbolData={
         }
       ], 
       "sectorTwoModifiers": [
+        {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_2_MOD"
+        }, 
         {
           "digits": "01", 
           "label": "Leader or Leadership", 
@@ -6205,6 +6265,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Biological", 
           "id": "BIOLOGICAL_MOD", 
@@ -7240,6 +7305,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Biological", 
           "id": "BIOLOGICAL_1_MOD", 
@@ -7332,6 +7402,11 @@ var symbolData={
         }
       ], 
       "sectorTwoModifiers": [
+        {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_2_MOD"
+        }, 
         {
           "digits": "01", 
           "label": "Biological", 
@@ -8821,7 +8896,7 @@ var symbolData={
             }, 
             {
               "digits": "06", 
-              "label": "Air  Detonation", 
+              "label": "Air Detonation", 
               "id": "AIR_DETONATION", 
               "graphic": "25210600.svg", 
               "entitySubTypes": []
@@ -12459,6 +12534,7 @@ var symbolData={
           "label": "Own Ship", 
           "id": "OWN_SHIP", 
           "graphic": "30150000.svg", 
+          "remarks": "The diameter of the icon shall be 1L. This icon shall be used with a friend standard identity only.", 
           "icon": "FULL_OCTAGON", 
           "entityTypes": []
         }, 
@@ -12467,6 +12543,7 @@ var symbolData={
           "label": "Fused Track", 
           "id": "FUSED_TRACK", 
           "graphic": "30160000.svg", 
+          "remarks": "All fused tracks shall have a pending standard identity frame.", 
           "icon": "FULL_OCTAGON", 
           "entityTypes": []
         }, 
@@ -12480,6 +12557,11 @@ var symbolData={
         }
       ], 
       "sectorOneModifiers": [
+        {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
         {
           "digits": "01", 
           "label": "Own Ship", 
@@ -12643,6 +12725,11 @@ var symbolData={
         }
       ], 
       "sectorTwoModifiers": [
+        {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_2_MOD"
+        }, 
         {
           "digits": "01", 
           "label": "Nuclear Powered", 
@@ -12923,6 +13010,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Antisubmarine Warfare", 
           "id": "ANTISUBMARINE_WARFARE_MOD", 
@@ -13106,6 +13198,11 @@ var symbolData={
         }
       ], 
       "sectorTwoModifiers": [
+        {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_2_MOD"
+        }, 
         {
           "digits": "01", 
           "label": "Air Independent Propulsion", 
@@ -14995,6 +15092,11 @@ var symbolData={
         }
       ], 
       "sectorOneModifiers": [
+        {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
         {
           "digits": "01", 
           "label": "Assassination", 
@@ -18066,6 +18168,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
+        {
           "digits": "14", 
           "label": "Data Transmission", 
           "id": "DATA_TRANSMISSION_MOD", 
@@ -18330,6 +18437,11 @@ var symbolData={
         }
       ], 
       "sectorOneModifiers": [
+        {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
         {
           "digits": "02", 
           "label": "Airborne Search and Bombing", 
@@ -18756,6 +18868,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Anti-Aircraft Fire Control", 
           "id": "ANTI_AIRCRAFT_FIRE_CONTROL_MOD", 
@@ -19168,6 +19285,11 @@ var symbolData={
       ], 
       "sectorOneModifiers": [
         {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
+        {
           "digits": "01", 
           "label": "Anti-Aircraft Fire Control", 
           "id": "ANTI_AIRCRAFT_FIRE_CONTROL_MOD", 
@@ -19551,6 +19673,11 @@ var symbolData={
         }
       ], 
       "sectorOneModifiers": [
+        {
+          "digits": "00", 
+          "label": "Unspecified", 
+          "id": "UNSPECIFIED_MOD"
+        }, 
         {
           "digits": "07", 
           "label": "Beacon Transponder (not IFF)", 
@@ -20710,7 +20837,7 @@ var symbolData={
     {
       "digits": "0", 
       "id": "NA", 
-      "label": "Not Applicable"
+      "label": "Unknown"
     }, 
     {
       "digits": "1", 
@@ -21410,12 +21537,12 @@ var symbolData={
   "amplifier": [
     {
       "digits": "0", 
-      "label": "Not Applicable", 
+      "label": "Unknown", 
       "id": "NA", 
       "descriptors": [
         {
           "digits": "0", 
-          "label": "Not Applicable", 
+          "label": "Unknown", 
           "id": "NA"
         }
       ]
