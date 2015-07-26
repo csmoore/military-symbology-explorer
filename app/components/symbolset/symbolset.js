@@ -176,7 +176,7 @@ angular.module('symbolApp')
             template: function (element, attrs) {
                 return '<div class="milsymbol symbol-smm">'
                     + '<img ng-src="{{currentBoundingOctagon}}">'
-                    + '<img class="symbol-sm" ng-src="{{modonepath+modone.graphic}}">'
+                    + '<img class="symbol-sm" ng-if="modeone.graphic" ng-src="{{modonepath+modone.graphic}}">'
                     + '</div>';
             },
             link: link
@@ -197,7 +197,7 @@ angular.module('symbolApp')
             template: function (element, attrs) {
                 return '<div class="milsymbol symbol-smm">'
                     + '<img ng-src="{{currentBoundingOctagon}}">'
-                    + '<img class="symbol-sm" ng-src="{{modtwopath+modtwo.graphic}}">'
+                    + '<img class="symbol-sm" ng-if="modeone.graphic" ng-src="{{modtwopath+modtwo.graphic}}">'
                     + '</div>';
             },
             link: link
