@@ -7791,8 +7791,8 @@ var symbolData={
             }, 
             {
               "digits": "05", 
-              "label": "Principle Direction of Fire", 
-              "id": "PRINCIPLE_DIRECTION_OF_FIRE", 
+              "label": "Principal Direction of Fire", 
+              "id": "PRINCIPAL_DIRECTION_OF_FIRE", 
               "graphic": "25140500.svg", 
               "geometryType": "LINE", 
               "entitySubTypes": []
@@ -8563,8 +8563,8 @@ var symbolData={
             }, 
             {
               "digits": "03", 
-              "label": "Downed Aircraft Pick-up Point", 
-              "id": "DOWNED_AIRCRAFT_PICK_UP_POINT", 
+              "label": "Downed Aircrew Pick-up Point", 
+              "id": "DOWNED_AIRCREW_PICK_UP_POINT", 
               "graphic": "25180300.svg", 
               "entitySubTypes": []
             }, 
@@ -8808,7 +8808,6 @@ var symbolData={
               "label": "Ship Area of Interest", 
               "id": "SHIP_AREA_OF_INTEREST", 
               "graphic": "25200400.svg", 
-              "geometryType": "AREA", 
               "entitySubTypes": [
                 {
                   "digits": "01", 
@@ -8831,7 +8830,6 @@ var symbolData={
               "label": "Active Maneuver Area", 
               "id": "ACTIVE_MANEUVER_AREA", 
               "graphic": "25200500.svg", 
-              "geometryType": "AREA", 
               "entitySubTypes": []
             }, 
             {
@@ -8839,7 +8837,6 @@ var symbolData={
               "label": "Cued Acquisition Doctrine", 
               "id": "CUED_ACQUISITION_DOCTRINE", 
               "graphic": "25200600.svg", 
-              "geometryType": "AREA", 
               "entitySubTypes": []
             }, 
             {
@@ -8847,7 +8844,6 @@ var symbolData={
               "label": "Radar Search Doctrine", 
               "id": "RADAR_SEARCH_DOCTRINE", 
               "graphic": "25200700.svg", 
-              "geometryType": "AREA", 
               "entitySubTypes": []
             }
           ]
@@ -10063,7 +10059,7 @@ var symbolData={
             }, 
             {
               "digits": "12", 
-              "label": "Call for Fire Area", 
+              "label": "Call for Fire Zone (CFFZ)", 
               "id": "CALL_FOR_FIRE_AREA", 
               "icon": "NA", 
               "geometryType": "NA", 
@@ -10624,8 +10620,7 @@ var symbolData={
                   "digits": "05", 
                   "label": "Dummy", 
                   "id": "MINEFIELD_DUMMY", 
-                  "graphic": "25270705.svg", 
-                  "geometryType": "AREA"
+                  "graphic": "25270705.svg"
                 }, 
                 {
                   "digits": "06", 
